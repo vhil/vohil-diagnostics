@@ -27,7 +27,6 @@
 			{
 				switch (level)
 				{
-					
 					case SeverityLevel.Debug:
 						this.Debug(msg, owner);
 						break;
@@ -52,7 +51,6 @@
 						this.Fatal(msg, owner, exception);
 						break;
 
-					
 					default:
 						throw new NotSupportedException($"Log level '{level.ToString()}' is not supported.");
 				}
