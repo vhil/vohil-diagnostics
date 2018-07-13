@@ -288,22 +288,22 @@
         public override void SingleError(string message, object owner)
         {
             if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
-            {
                 return;
-            }
-                
-            this.Error($"SINGLE MSG: {message}", owner);
+
+	        message = $"SINGLE MSG: {message}";
+
+			this.Error(message, owner);
             this.Singles.Add(message, (object)string.Empty);
         }
 
         public override void SingleFatal(string message, Exception exception, Type ownerType)
         {
             if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
-            {
                 return;
-            }
-               
-            this.Fatal($"SINGLE MSG: {message}", exception, ownerType);
+
+			message = $"SINGLE MSG: {message}";
+
+			this.Fatal(message, exception, ownerType);
             this.Singles.Add(message, string.Empty);
         }
 
@@ -315,11 +315,11 @@
         public override void SingleWarn(string message, object owner)
         {
             if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
-            {
                 return;
-            }
-                
-            this.Warn($"SINGLE MSG: {message}", owner);
+
+	        message = $"SINGLE MSG: {message}";
+
+			this.Warn(message, owner);
             this.Singles.Add(message, string.Empty);
         }
 
