@@ -2,11 +2,11 @@
 {
 	public enum SeverityLevel
 	{
-		Fatal,
-		Error,
-		Warn,
-		Info,
-		Debug,
-		Audit
+		Debug = 0,
+		Info = 1,
+		Audit = 2,
+		Warn = 3,
+		Error = 4,
+		Fatal = 5,
 	}
 }

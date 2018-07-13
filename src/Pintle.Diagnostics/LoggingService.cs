@@ -4,9 +4,12 @@
 	using System.Collections.Generic;
 	using Sitecore.Caching;
 	using Sitecore.Configuration;
+	using Sitecore.Abstractions;
 
-	public class LoggingService : Sitecore.Abstractions.BaseLog
+	public class LoggingService : BaseLog
     {
+	    public static BaseLog ConfiguredInstance => Factory.CreateObject("pintle/logging/defaultLogger", true) as LoggingService;
+
         private readonly List<ILogProvider> logProviders;
         private ICache singles;
 
@@ -100,7 +103,7 @@
         {
             foreach (var provider in this.logProviders)
             {
-                provider.Log(SeverityLevel.Audit, String.Format(format, (object[])parameters), owner);
+                provider.Log(SeverityLevel.Audit, string.Format(format, parameters), owner);
             }
         }
 
@@ -108,7 +111,7 @@
         {
             foreach (var provider in this.logProviders)
             {
-                provider.Log(SeverityLevel.Audit, String.Format(format, (object[])parameters), (object)ownerType);
+                provider.Log(SeverityLevel.Audit, string.Format(format, parameters), (object)ownerType);
             }
         }
 
@@ -116,7 +119,7 @@
         {
             foreach (var provider in this.logProviders)
             {
-                provider.Log(SeverityLevel.Debug, message, (object)typeof(LoggingService));
+                provider.Log(SeverityLevel.Debug, message, typeof(LoggingService));
             }
         }
 

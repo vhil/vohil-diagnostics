@@ -10,9 +10,7 @@
 		private static readonly object SyncRoot = new object();
 		private readonly Logger logger;
 
-		public NLogLogProvider(
-			string logLevel,
-			string filePath)
+		public NLogLogProvider(string filePath, string logLevel)
 			:base(logLevel)
         {
 			lock (SyncRoot)
@@ -58,22 +56,22 @@
 		    return loggerName;
 	    }
 
-		public override void Audit(string message, object owner)
+		protected override void Audit(string message, object owner)
 		{
 			this.Info(message, owner);
 		}
 
-		public override void Debug(string message, object owner)
+		protected override void Debug(string message, object owner)
 		{
 			this.logger.Debug(message);
 		}
 
-		public override void Info(string message, object owner)
+		protected override void Info(string message, object owner)
 		{
 			this.logger.Info(message);
 		}
 
-		public override void Warn(string message, object owner, Exception exception = null)
+		protected override void Warn(string message, object owner, Exception exception = null)
 		{
 			if (exception == null)
 			{
@@ -85,7 +83,7 @@
 			}
 		}
 
-		public override void Error(string message, object owner, Exception exception = null)
+		protected override void Error(string message, object owner, Exception exception = null)
 		{
 			if (exception == null)
 			{
@@ -97,7 +95,7 @@
 			}
 		}
 
-		public override void Fatal(string message, object owner, Exception exception = null)
+		protected override void Fatal(string message, object owner, Exception exception = null)
 		{
 			if (exception == null)
 			{

@@ -12,22 +12,25 @@
 			this.logger = new DefaultLog();
 		}
 
-		public override void Audit(string message, object owner)
+		protected override void Audit(string message, object owner)
 		{
 			this.logger.Audit(message, owner);
 		}
 
-		public override void Debug(string message, object owner)
+		protected override void Debug(string message, object owner)
 		{
-			this.logger.Debug(message, owner);
+			if (this.logger.IsDebugEnabled)
+			{
+				this.logger.Debug(message, owner);
+			}
 		}
 
-		public override void Info(string message, object owner)
+		protected override void Info(string message, object owner)
 		{
 			this.logger.Info(message, owner);
 		}
 
-		public override void Warn(string message, object owner, Exception exception = null)
+		protected override void Warn(string message, object owner, Exception exception = null)
 		{
 			if (exception == null)
 			{
@@ -39,7 +42,7 @@
 			}
 		}
 
-		public override void Error(string message, object owner, Exception exception = null)
+		protected override void Error(string message, object owner, Exception exception = null)
 		{
 			if (exception == null)
 			{
@@ -51,7 +54,7 @@
 			}
 		}
 
-		public override void Fatal(string message, object owner, Exception exception = null)
+		protected override void Fatal(string message, object owner, Exception exception = null)
 		{
 			if (exception == null)
 			{
