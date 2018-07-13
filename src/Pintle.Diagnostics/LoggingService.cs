@@ -58,6 +58,11 @@
 			this.logProviders.AddRange(providers);
 	    }
 
+	    public override bool WarnEnabled(string loggerName)
+	    {
+			return true;
+		}
+
 	    public override bool Enabled => true;
 
         public override bool IsDebugEnabled => true;
@@ -131,7 +136,17 @@
             }
         }
 
-        public override void Debug(string message, object owner)
+	    public override bool DebugEnabled(object owner)
+	    {
+		    return true;
+	    }
+
+	    public override bool DebugEnabled(string loggerName)
+	    {
+			return true;
+		}
+
+	    public override void Debug(string message, object owner)
         {
             foreach (var provider in this.logProviders)
             {
@@ -163,7 +178,17 @@
             }
         }
 
-        public override void Error(string message, Exception exception, Type ownerType)
+	    public override bool ErrorEnabled(object owner)
+	    {
+			return true;
+		}
+
+	    public override bool ErrorEnabled(string loggerName)
+	    {
+			return true;
+		}
+
+	    public override void Error(string message, Exception exception, Type ownerType)
         {
             foreach (var provider in this.logProviders)
             {
@@ -211,7 +236,22 @@
             }
         }
 
-        public override void Fatal(string message, Exception exception, object owner)
+	    public override void Fatal(string message, Exception exception, string loggerName)
+	    {
+		    this.Fatal(message, exception, (object) loggerName);
+	    }
+
+	    public override bool FatalEnabled(object owner)
+	    {
+			return true;
+		}
+
+	    public override bool FatalEnabled(string loggerName)
+	    {
+			return true;
+		}
+
+	    public override void Fatal(string message, Exception exception, object owner)
         {
             foreach (var provider in this.logProviders)
             {
@@ -227,7 +267,17 @@
             }
         }
 
-        public override void Info(string message, object owner)
+	    public override bool InfoEnabled(object owner)
+	    {
+			return true;
+		}
+
+	    public override bool InfoEnabled(string loggerName)
+	    {
+			return true;
+		}
+
+	    public override void Info(string message, object owner)
         {
             foreach (var provider in this.logProviders)
             {
@@ -289,7 +339,12 @@
             }
         }
 
-        public override void Warn(string message, Exception exception, object owner)
+	    public override bool WarnEnabled(object owner)
+	    {
+			return true;
+		}
+
+	    public override void Warn(string message, Exception exception, object owner)
         {
             foreach (var provider in this.logProviders)
             {

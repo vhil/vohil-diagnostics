@@ -19,7 +19,7 @@
 
 		protected override void Debug(string message, object owner)
 		{
-			if (this.logger.IsDebugEnabled)
+			if (this.logger.DebugEnabled(owner))
 			{
 				this.logger.Debug(message, owner);
 			}
@@ -27,11 +27,16 @@
 
 		protected override void Info(string message, object owner)
 		{
-			this.logger.Info(message, owner);
+			if (this.logger.InfoEnabled(owner))
+			{
+				this.logger.Info(message, owner);
+			}
 		}
 
 		protected override void Warn(string message, object owner, Exception exception = null)
 		{
+			if (!this.logger.WarnEnabled(owner)) return;
+
 			if (exception == null)
 			{
 				this.logger.Warn(message, owner);
@@ -44,6 +49,8 @@
 
 		protected override void Error(string message, object owner, Exception exception = null)
 		{
+			if (!this.logger.ErrorEnabled(owner)) return;
+
 			if (exception == null)
 			{
 				this.logger.Error(message, owner);
@@ -56,6 +63,8 @@
 
 		protected override void Fatal(string message, object owner, Exception exception = null)
 		{
+			if (!this.logger.FatalEnabled(owner)) return;
+
 			if (exception == null)
 			{
 				this.logger.Fatal(message, owner);
