@@ -242,7 +242,7 @@
                 return;
             }
                 
-            this.Error(message, owner);
+            this.Error($"SINGLE MSG: {message}", owner);
             this.Singles.Add(message, (object)string.Empty);
         }
 
@@ -253,7 +253,7 @@
                 return;
             }
                
-            this.Fatal($"SINGLE MSG: {message as object}", exception, ownerType);
+            this.Fatal($"SINGLE MSG: {message}", exception, ownerType);
             this.Singles.Add(message, string.Empty);
         }
 
@@ -269,7 +269,7 @@
                 return;
             }
                 
-            this.Warn(message, owner);
+            this.Warn($"SINGLE MSG: {message}", owner);
             this.Singles.Add(message, string.Empty);
         }
 
