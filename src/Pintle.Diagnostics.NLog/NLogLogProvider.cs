@@ -100,7 +100,7 @@ namespace Pintle.Diagnostics.NLog
 			}
 			else
 			{
-				this.logger.Error(exception, message);
+				this.logger.Error(exception, $"{message} {exception}");
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace Pintle.Diagnostics.NLog
 			}
 			else
 			{
-				this.logger.Fatal(exception, message);
+				this.logger.Fatal(exception, $"{message} {exception}");
 			}
 		}
 	}
