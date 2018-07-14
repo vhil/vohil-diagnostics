@@ -237,10 +237,10 @@
 
         public override void SingleError(string message, object owner)
         {
-            if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
-                return;
-
 	        message = $"SINGLE MSG: {message}";
+
+			if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
+                return;
 
 			this.Error(message, owner);
             this.Singles.Add(message, (object)string.Empty);
@@ -248,10 +248,10 @@
 
         public override void SingleFatal(string message, Exception exception, Type ownerType)
         {
-            if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
-                return;
+	        message = $"SINGLE MSG: {message}";
 
-			message = $"SINGLE MSG: {message}";
+			if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
+                return;
 
 			this.Fatal(message, exception, ownerType);
             this.Singles.Add(message, string.Empty);
@@ -264,10 +264,10 @@
 
         public override void SingleWarn(string message, object owner)
         {
-            if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
-                return;
-
 	        message = $"SINGLE MSG: {message}";
+
+			if (!this.Enabled || this.Singles == null || this.Singles.ContainsKey(message))
+                return;
 
 			this.Warn(message, owner);
             this.Singles.Add(message, string.Empty);
