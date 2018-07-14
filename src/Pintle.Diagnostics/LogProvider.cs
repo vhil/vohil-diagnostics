@@ -23,7 +23,7 @@
 		{
 			var msg = this.FormatMessage(message, owner);
 
-			if ((int)this.LogLevel >= (int)level)
+			if ((int)this.LogLevel <= (int)level)
 			{
 				switch (level)
 				{
