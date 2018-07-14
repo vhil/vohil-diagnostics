@@ -1,12 +1,11 @@
-﻿using System.IO;
-using System.Web;
-
-namespace Pintle.Diagnostics.NLog
+﻿namespace Pintle.Diagnostics.NLog
 {
 	using System;
 	using global::NLog;
 	using NLogConfig = global::NLog.Config;
 	using NLogTargets = global::NLog.Targets;
+	using System.IO;
+	using System.Web;
 
 	public class NLogLogProvider : LogProvider
 	{
