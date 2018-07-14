@@ -1,4 +1,7 @@
-﻿namespace Pintle.Diagnostics.NLog
+﻿using System.IO;
+using System.Web;
+
+namespace Pintle.Diagnostics.NLog
 {
 	using System;
 	using global::NLog;
@@ -16,6 +19,16 @@
 			lock (SyncRoot)
 			{
 				filePath = filePath.Replace("/", "\\");
+
+				if (filePath.StartsWith("\\"))
+				{
+					var appDomain = AppDomain.CurrentDomain.BaseDirectory;
+					var virtualPath = HttpRuntime.AppDomainAppVirtualPath;
+					var appPath = HttpRuntime.AppDomainAppPath;
+
+					filePath = Path.Combine(HttpRuntime.AppDomainAppVirtualPath, filePath);
+				}
+
 				var loggerName = GenerateLoggerName(filePath);
 				var targetName = "Target_" + loggerName;
 
