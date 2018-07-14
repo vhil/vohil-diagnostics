@@ -22,7 +22,7 @@ namespace Pintle.Diagnostics.NLog
 
 				if (filePath.StartsWith("\\"))
 				{
-					filePath = Path.Combine(HttpRuntime.AppDomainAppPath, filePath);
+					filePath = Path.Combine(HttpRuntime.AppDomainAppPath, filePath.TrimStart('\\'));
 				}
 
 				var loggerName = GenerateLoggerName(filePath);
