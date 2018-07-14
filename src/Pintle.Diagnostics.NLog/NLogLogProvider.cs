@@ -22,11 +22,7 @@ namespace Pintle.Diagnostics.NLog
 
 				if (filePath.StartsWith("\\"))
 				{
-					var appDomain = AppDomain.CurrentDomain.BaseDirectory;
-					var virtualPath = HttpRuntime.AppDomainAppVirtualPath;
-					var appPath = HttpRuntime.AppDomainAppPath;
-
-					filePath = Path.Combine(HttpRuntime.AppDomainAppVirtualPath, filePath);
+					filePath = Path.Combine(HttpRuntime.AppDomainAppPath, filePath);
 				}
 
 				var loggerName = GenerateLoggerName(filePath);
