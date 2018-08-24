@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>C:\Users\Volodymyr Hil\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel, Version=11.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Kernel.NoReferences.9.0.171002\lib\NET462\Sitecore.Kernel.dll</HintPath>
       <Private>True</Private>
@@ -45,10 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationReader.cs" />
+    <Compile Include="Configuration\ServicesConfigurator.cs" />
+    <Compile Include="Pipelines\InitializeLoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SitecoreLogProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Config\Modules\Pintle.Diagnostics\Pintle.Diagnostics.Sitecore.ReplaceBaseLog.config" />
     <None Include="App_Config\Modules\Pintle.Diagnostics\Pintle.Diagnostics.Sitecore.config" />
     <None Include="packages.config" />
   </ItemGroup>

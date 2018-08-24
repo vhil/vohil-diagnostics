@@ -52,6 +52,11 @@
 	    {
 	    }
 
+	    public void AddLogProvider(ILogProvider logProvider)
+	    {
+			this.logProviders.Add(logProvider);
+	    }
+
 		public LoggingService(params ILogProvider[] providers)
 	    {
 			this.logProviders = new List<ILogProvider>();
