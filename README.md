@@ -71,11 +71,75 @@ This can be easily re-configured to match your project needs by modifying config
 </configuration>
 ``` 
 
-## Use a dedicated logging service for your feature
-
 ## Use a dedicated log file for your feature
 
+You can create your own logging service by configuring it in sitecore configs:
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+	<sitecore>
+		<myFeature>
+			<logging>
+				<myFeatureLogger type="Pintle.Diagnostics.LoggingService, Pintle.Diagnostics" singleInstance="true" >
+					<param name="warnLogger" ref="myFeature/logging/providers/myFeatureLogFile"/>
+				</myFeatureLogger>
+				<providers>
+					<myFeatureLogFile type="Pintle.Diagnostics.NLog.NLogLogProvider, Pintle.Diagnostics.NLog"
+					             singleInstance="true"
+					             logFilePath="$(dataFolder)/logs/log.myFeature.${date:format=yyyyMMdd}.txt">
+						<param name="filePath">$(logFilePath)</param>
+						<param name="logLevel">Info</param>
+					</myFeatureLogFile>
+				</providers>
+			</logging>
+		</myFeature>
+	</sitecore>
+</configuration>
+```
+
+Then in your feature code you still inject the Sitecore.Abstraction.BaseLog dependency:
+
+```cs
+using Sitecore.Abstractions;
+
+public class MyFeatureService
+{
+	protected readonly BaseLog logger;
+
+	public MyFeatureService(BaseLog logger)
+	{
+		this.logger = logger;
+	}
+}
+```
+
+And in your dependency injection services configurator you can register your feature to use your new dedicated logger:
+```cs
+using Microsoft.Extensions.DependencyInjection;
+using Sitecore.DependencyInjection;
+using Sitecore.Abstractions;
+using Sitecore.Configuration;
+
+public class ServicesConfigurator : IServicesConfigurator
+{
+	public void Configure(IServiceCollection serviceCollection)
+	{
+		serviceCollection.AddTransient<MyFeatureService>(provider => 
+			new MyFeatureService(Factory.CreateObject("myFeature/logging/myFeatureLogger", true) as BaseLog));
+	}
+}
+```
+
+You are welcome to add more log files with different severity levels to the logging service configuration.
 
 
+## Contributing
 
+We love it if you would contribute!
 
+Help us! Keep the quality of feature requests and bug reports high
+
+We strive to make it possible for everyone and anybody to contribute to this project. Please help us by making issues easier to resolve by providing sufficient information. Understanding the reasons behind issues can take a lot of time if information is left out.
+
+Thank you, and happy contributing!
